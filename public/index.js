@@ -63,6 +63,14 @@ function commission(){
   }
 }
 
+function deductible(){
+  for(var i = 0; i < events.length; i++){
+    if(events[i].options.deductibleReduction){
+      events[i].price += events[i].persons;
+    }
+  }
+}
+
 const events = [{
   'id': 'bba9500c-fd9e-453f-abf1-4cd8f52af377',
   'booker': 'esilv-bde',
@@ -185,7 +193,8 @@ const actors = [{
 
 bookingPrice();
 decreasing();
-commission()
+commission();
+deductible();
 console.log(bars);
 console.log(events);
 console.log(actors);
