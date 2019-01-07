@@ -71,6 +71,27 @@ function deductible(){
   }
 }
 
+function payTheActors(){
+  for(var i = 0; i < actors.length; i++){
+    for(var j = 0; j < events.length; j++){
+      if(actors[i].eventId == events[j].id){
+        actors[i].payment[0].amount = events[j].price;
+        actors[i].payment[2].amount = events[j].commission.insurance;
+        actors[i].payment[3].amount = events[j].commission.treasury;
+        if(events[j].options.deductibleReduction){
+          actors[i].payment[1].amount = 0.7*(events[j].price - events[i].persons);
+          actors[i].payment[4].amount = events[j].commission.privateaser + events[i].persons;
+        }
+        else {
+          actors[i].payment[1].amount = 0.7*events[j].price;
+          actors[i].payment[4].amount = events[j].commission.privateaser;
+        }
+        break;
+      }
+    }
+  }
+}
+
 const events = [{
   'id': 'bba9500c-fd9e-453f-abf1-4cd8f52af377',
   'booker': 'esilv-bde',
@@ -195,6 +216,7 @@ bookingPrice();
 decreasing();
 commission();
 deductible();
+payTheActors()
 console.log(bars);
 console.log(events);
 console.log(actors);
