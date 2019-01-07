@@ -26,6 +26,20 @@ const bars = [{
 //The `price` is updated from step 1 and 2
 //The `commission` is updated from step 3
 //The `options` is useful from step 4
+
+function bookingPrice(){
+  var price;
+  for(var i = 0; i < events.length; i++) {
+    for(var j = 0; j < bars.length; j++){
+      if(bars[i].id == events[i].barId){
+        price = events[i].time*bars[i].pricePerHour + events[i].persons*bars[i].pricePerPerson;
+        events[i].price = price;
+        break;
+      }
+    }
+  }
+}
+
 const events = [{
   'id': 'bba9500c-fd9e-453f-abf1-4cd8f52af377',
   'booker': 'esilv-bde',
@@ -60,7 +74,7 @@ const events = [{
   'id': '94dab739-bd93-44c0-9be1-52dd07baa9f6',
   'booker': 'otacos',
   'barId': '6e06c9c0-4ab0-4d66-8325-c5fa60187cf8',
-  'distance': 5,
+  'time': 5,
   'persons': 80,
   'options': {
     'deductibleReduction': true
@@ -146,6 +160,7 @@ const actors = [{
   }]
 }];
 
+bookingPrice();
 console.log(bars);
 console.log(events);
 console.log(actors);
