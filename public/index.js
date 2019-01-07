@@ -54,6 +54,15 @@ function decreasing(){
   }
 }
 
+function commission(){
+  for(var i = 0; i < events.length; i++){
+    var commission = 0.3*events[i].price;
+    events[i].commission.insurance = 0.5*commission;
+    events[i].commission.treasury = events[i].persons;
+    events[i].commission.privateaser = commission - events[i].commission.insurance - events[i].commission.treasury;
+  }
+}
+
 const events = [{
   'id': 'bba9500c-fd9e-453f-abf1-4cd8f52af377',
   'booker': 'esilv-bde',
@@ -176,6 +185,7 @@ const actors = [{
 
 bookingPrice();
 decreasing();
+commission()
 console.log(bars);
 console.log(events);
 console.log(actors);
