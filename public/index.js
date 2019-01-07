@@ -40,6 +40,20 @@ function bookingPrice(){
   }
 }
 
+function decreasing(){
+  for(var i = 0; i < events.length; i++){
+    if(events[i].persons >= 10 && events[i].persons < 20) {
+      events[i].price = 0.9*events[i].price;
+    }
+    else if(events[i].persons >= 20 && events[i].persons < 60) {
+      events[i].price = 0.7*events[i].price;
+    }
+    else if(events[i].persons >= 60) {
+      events[i].price = 0.5*events[i].price;
+    }
+  }
+}
+
 const events = [{
   'id': 'bba9500c-fd9e-453f-abf1-4cd8f52af377',
   'booker': 'esilv-bde',
@@ -161,6 +175,7 @@ const actors = [{
 }];
 
 bookingPrice();
+decreasing();
 console.log(bars);
 console.log(events);
 console.log(actors);
